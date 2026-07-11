@@ -1,0 +1,34 @@
+{
+  "name": "dummy-swiggy",
+  "version": "1.0.0",
+  "description": "Dummy Swiggy Project - React learning",
+  "keywords": [
+    "react"
+  ],
+  "homepage": "https://github.com/rudranilK/react-learning#readme",
+  "bugs": {
+    "url": "https://github.com/rudranilK/react-learning/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rudranilK/react-learning.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "scripts": {
+    "start-dev": "parcel ./src/index.html",
+    "build": "parcel build ./src/index.html",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "browserslist": [
+    "last 2 Chrome version"
+  ]
+}

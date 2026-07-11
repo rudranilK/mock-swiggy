@@ -1,0 +1,64 @@
+.header {
+  display: flex; /* everything inside the header class is displayed in the same line */
+  justify-content: space-between; /* to have space between the logo and the nav-items */
+  /* Since there are only 2 items in the header E.G. logo-container & nav-items, hence they have 1 in left & 1 in right*/
+
+  border: 1px solid black; /* adding some border to make the header look like a header/ long stretched banner*/
+}
+
+.logo {
+  width: 100px; /* making the logo image fixed & small */
+  /* adding some padding & margin as the Border of header looks sticking to the image, giving it some white space*/
+  padding: 2px;
+  margin: 2px;
+}
+
+.nav-items {
+  padding: 0px 20px; /* padding for the li items in the nav-items class */
+}
+.nav-items > ul {
+  font-size: 22px;
+  display: flex; /* Grabbing the ul list, having the list items display in a single line */
+  list-style-type: none; /* removing the bullet points that come on the list items */
+}
+
+.nav-items > ul > li {
+  /* list items contents are over-lapping hence,*/
+  padding: 5px; /* to add padding */
+  margin: 10px; /* to add margin */
+}
+
+.search-section {
+  /* to not have it stacked on res-card items */
+  padding: 10px;
+}
+
+/* For Resturant cards */
+.res-card {
+  /* Giving some absolute width, height & border to have a card like shape */
+  width: 200px;
+  /* height: 300px; - no Need for height, it will automatically take it 100%*/
+
+  padding: 5px; /*  to have all the things, image, header 
+  to have padding around them and fit in the card and not touch the border of the card */
+  margin: 5px; /* some margin around the cards, 
+  so when the cards display in flex, ( inside res-card-container )
+  not have them touch each other */
+}
+
+.res-logo {
+  width: 100%; /* have the image fit in the res-card container */
+}
+
+/* When we hover, */
+.res-card:hover {
+  cursor: pointer; /* displays a hand when u place the cursor on it */
+  /* When we hover, then the border shows */
+  border: 1px solid black;
+}
+
+/* To have the res-card containers displayed side by side */
+.res-card-container {
+  display: flex;
+  flex-wrap: wrap;
+}
