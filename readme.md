@@ -21,3 +21,9 @@ npx parcel build src/index.html
 - Css Styling for the Resturant Card, Logo, Swiggy logo, Nav bar in Header component
 - Dummy data for Resturants
 - React Props -> render the dummy resturant data on our list page
+
+## Episode 5
+
+- Restructured the app
+
+
