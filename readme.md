@@ -25,5 +25,10 @@ npx parcel build src/index.html
 ## Episode 5
 
 - Restructured the app
-
-
+- Feature | Button : Fetch Top rated Resturants
+  - Click handler prop on the button | onClick Event Listener
+  - React Hook : "useState"
+    - state variable
+    - function to set the set variable
+    - React Fiber dicussion
+    - Virtula DOM discussion

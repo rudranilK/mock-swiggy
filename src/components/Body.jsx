@@ -1,15 +1,37 @@
 import ResturantCard from "./ResturantCard";
 import DB from "../constants/mockData";
+import { fetchTopResturants } from "../eventListeners";
+import { useState } from "react";
 
 //* Actual Body Component
 const Body = () => {
+  //* React Hooks - useState
+  const [resturants, setResturant] = useState(DB);
+
+  //   let resturants = DB;
+
   return (
     <div className="body">
-      <div className="search-section">
+      {/* // TODO : Implement Search functionality later */}
+      {/* <div className="search-section">
         <button>Search</button>
+      </div> */}
+      <div className="filter">
+        <button
+          className="filter-btn"
+          onClick={async () => {
+            const updatedList = await fetchTopResturants();
+
+            //*  Now, re-render the list of resturants
+            setResturant(updatedList);
+            console.log(`Resturant List : `, resturants);
+          }}
+        >
+          Top Rated Resturants
+        </button>
       </div>
       <div className="res-card-container">
-        {DB.map((el) => (
+        {resturants.map((el) => (
           <ResturantCard key={el.data.id} data={el} />
         ))}
         {
