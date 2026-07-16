@@ -32,3 +32,15 @@ npx parcel build src/index.html
     - function to set the set variable
     - React Fiber dicussion
     - Virtula DOM discussion
+
+## Episode 6
+
+- Mockdata structure to match API data
+- React Hook : "useEffect"
+  - The Body component rendering finishes
+  - useEffect Hook's callback function is called
+    - Calls the actual API, fetches the data
+    - Body fucntional component re-renders, with the use of arg[1] of "useState" hook
+    - Body is re-rendered with actual API data
+  - Bug Fix | ResturantCard Component not rendering
+    - patch documentation : Issue 1

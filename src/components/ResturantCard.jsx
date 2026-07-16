@@ -1,13 +1,29 @@
+import { CDN_URL } from "../constants";
+
 //* Body Components - Resturantcard
 const ResturantCard = (props) => {
-  const { id, resName, cuisine, stars, eta, icon } = props?.data?.data;
+  const {
+    id,
+    name: resName,
+    cuisines,
+    avgRating: stars,
+    sla,
+    cloudinaryImageId: icon,
+    costForTwo,
+  } = props?.data;
+
+  const { deliveryTime: eta } = sla;
+
+  const isHttpsIcon = /^https?:\/\//i.test(icon);
+  const resturantIcon = isHttpsIcon ? icon : `${CDN_URL}${icon}`;
   return (
     // using inline css here, injecting similar to react element
     <div className="res-card" style={styleCard}>
-      <img className="res-logo" alt="res-logo" src={icon}></img>
+      <img className="res-logo" alt="res-logo" src={resturantIcon}></img>
       <h3>{resName}</h3>
-      <h4>{cuisine}</h4>
+      <h4>{cuisines.join(", ")}</h4>
       <h4>{stars} stars</h4>
+      <h4>{costForTwo}</h4>
       <h4>{eta} mins</h4>
     </div>
   );

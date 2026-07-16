@@ -60,7 +60,7 @@
 }
 
 .res-logo {
-  width: 100%; /* have the image fit in the res-card container */
+  width: 100%; /* have the image fit in the full width res-card container */
 }
 
 /* When we hover, */

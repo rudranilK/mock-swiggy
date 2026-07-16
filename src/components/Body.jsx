@@ -1,14 +1,27 @@
 import ResturantCard from "./ResturantCard";
 import DB from "../constants/mockData";
-import { fetchTopResturants } from "../eventListeners";
-import { useState } from "react";
+import { fetchTopResturants, fetchAllResturants } from "../service";
+import { useState, useEffect } from "react";
 
 //* Actual Body Component
 const Body = () => {
   //* React Hooks - useState
   const [resturants, setResturant] = useState(DB);
+  //* STEP 1 : Render UI with default data in DB file with useState
 
-  //   let resturants = DB;
+  //* Hook - runs after this 'Body' component is rendered
+  useEffect(() => {
+    populateData();
+    //* STEP 2 : once Body component is rendered call useEffect callback
+  }, []);
+
+  async function populateData() {
+    //* Fetch all resturant data
+    const allRes = await fetchAllResturants();
+
+    //* Update the resturant list after API success
+    setResturant(allRes);
+  }
 
   return (
     <div className="body">
@@ -24,16 +37,17 @@ const Body = () => {
 
             //*  Now, re-render the list of resturants
             setResturant(updatedList);
-            console.log(`Resturant List : `, resturants);
+            console.log(`Resturant List : `, updatedList);
           }}
         >
           Top Rated Resturants
         </button>
       </div>
       <div className="res-card-container">
-        {resturants.map((el) => (
-          <ResturantCard key={el.data.id} data={el} />
-        ))}
+        {resturants.map((el) => {
+          const { info: resturant } = el;
+          return <ResturantCard key={resturant?.id ?? 0} data={resturant} />;
+        })}
         {
           //* previous way of sending data
           /* <ResturantCard
