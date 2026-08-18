@@ -44,3 +44,12 @@ npx parcel build src/index.html
     - Body is re-rendered with actual API data
   - Bug Fix | ResturantCard Component not rendering
     - patch documentation : Issue 1
+- Shimmer UI : Shimmer Functional Component
+  - Dummy UI rendering when API data is not yet with us
+  - also Known as Conditional Rendering : Render based on condition
+- LogIn Button | "useState" hook exercise
+  - Inside Header Functional Component -> Button Component
+- Search Text & Button
+  - Inside Body Functional Component -> Search text & button
+    - overwriting the original data
+    - Issue 2 in patch.md

@@ -28,19 +28,27 @@
   margin: 10px; /* to add margin */
 }
 
-/**  Buttons  */
-
-.search-section {
-  /* to not have it stacked on res-card items */
-  padding: 10px;
+/* login button on header */
+.login {
+  padding: 0 20px;
+  cursor: pointer; /* makes the button look clickable when u hover*/
 }
+
+/**  Filters/Buttons  */
 
 .filter {
   /* to not have it stacked on res-card items */
   padding: 10px;
+  display: flex; /* To have all filter options display in same line*/
 }
 
 .filter-btn {
+  /* to not have it stacked on res-card items */
+  margin: 5px;
+  cursor: pointer;
+}
+
+.search {
   /* to not have it stacked on res-card items */
   margin: 5px;
   cursor: pointer;
@@ -70,8 +78,25 @@
   border: 1px solid black;
 }
 
-/* To have the res-card containers displayed side by side */
+/* To have the res-card components displayed side by side */
 .res-card-container {
+  display: flex;
+  flex-wrap: wrap; /* This property allows the card to take their mentioned dimentions like width * height and then 
+  have them displayed in flex, otherwise all card just display in 1 Row, crammed up */
+}
+
+/** Shimmer Ui Cards */
+
+.shimmer-card {
+  /* Giving some absolute width & height to mimic resturantCard component shape */
+  width: 200px;
+  height: 400px;
+  margin: 20px; /* some margin on the card */
+  background-color: #f0f0f0;
+}
+
+/* To have the shimmer-container mimic res-card container */
+.shimmer-container {
   display: flex;
   flex-wrap: wrap;
 }

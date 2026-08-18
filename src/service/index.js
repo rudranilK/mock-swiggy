@@ -52,7 +52,6 @@ export const fetchAllResturants = async () => {
 //   });
 // };
 
-export const fetchTopResturants = async () => {
-  console.log("Fetching top rated resturants, Rating > 4.5");
-  return DB.filter((res) => (Number(res.info.avgRating) || 0) >= 4.2);
+export const fetchTopResturants = (resturants) => {
+  return resturants.filter((res) => (Number(res.info.avgRating) || 0) >= 4.5);
 };

@@ -41,3 +41,45 @@ resturants.map(el => <ResturantCard key={el.info.id} data={el.info} />)
 You can call ResturantCard ( propsuired so React receives the element descriptors and then calls your component during rendering. ) directly as a plain function, but that bypasses React (won't mount hooks, won't be tracked by the reconciler) — don’t do that.
 
 - Bottom line: returning the JSX from map is reqJSX like <ResturantCard info={x} /> compiles to React.createElement(ResturantCard, { info: x }).
+
+## Issue 2.
+
+Overwriting the original data in Search Test & Button feature
+
+If resturants is your main state:
+
+```
+const [resturants, setResturant] = useState([]);
+```
+
+Then:
+
+```
+const filteredRes = resturants.filter(...);
+setResturant(filteredRes);
+```
+
+After the first search, you've permanently replaced the full list with the filtered list.
+
+Example:
+
+    Original: [Pizza, Burger, KFC]
+    Search: "P"
+    Result: [Pizza]
+
+Now resturants only contains [Pizza].
+
+Next search:
+
+    Search: ""
+
+You can't get Burger and KFC back because they no longer exist in state.
+
+A common solution:
+
+```
+const [allRestaurants, setAllRestaurants] = useState([]);
+const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+```
+
+Filter from allRestaurants and display filteredRestaurants.
