@@ -27,7 +27,11 @@ the JSX expression is evaluated but its value is discarded, the callback returns
 ```
 resturants.map((el) => {
     const { info: resturant } = el;
-    return <ResturantCard key={resturant?.id ?? 0} data={resturant} />;
+    return
+        (<ResturantCard
+            key={resturant?.id ?? 0}
+            data={resturant}
+        />);
   }
 )
 ```
@@ -75,6 +79,10 @@ Next search:
 
 You can't get Burger and KFC back because they no longer exist in state.
 
+    Problem: once you update the resturants state variable, even after clearing the input box,
+    you can't get the old value of all resturants - as the functional component has already being called
+    previous value is lost now as there is no global variable concept.
+
 A common solution:
 
 ```
@@ -83,3 +91,9 @@ const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 ```
 
 Filter from allRestaurants and display filteredRestaurants.
+
+- Inititally when API call suceeds, update both the state variables
+- When you search & filter, just update the filteredResturants variable.
+- Have the ListOfresturants as the source of truth
+- When displaying the resturant cards, display from filteredResturants
+- Initial value is added after api call ( both variables )

@@ -6,10 +6,12 @@ import { useState, useEffect } from "react";
 
 //* Body Functional Component
 const Body = () => {
-  //* STEP 1.0: register the useState hook & state variable for resturant data
+  //* STEP 1.0: register the useState hook & state variable for resturant data - csource of truth
   const [resturants, setResturant] = useState([]);
+  //* STEP 1.1: register the useState hook & state variable for filtered resturant data - this is displayed
+  const [filteredResturants, setFilteredResturant] = useState([]);
 
-  //* STEP 1.1: register the useState hook & state variable for Search Filter
+  //* STEP 1.2: register the useState hook & state variable for Search Filter
   const [searchText, setSearchText] = useState("");
 
   //* Hook - runs after this 'Body' component is rendered
@@ -23,8 +25,11 @@ const Body = () => {
     //* Fetch all resturant data
     const allRes = await fetchAllResturants();
 
-    //* Update the resturant list after API success
+    //* 1. Update the resturant list( Source of data) after API success
     setResturant(allRes);
+
+    //* 2. Update the filtered resturant list( Display List)
+    setFilteredResturant(allRes);
   }
 
   //* STEP 2 : Render Shimmer UI when no data
@@ -59,10 +64,8 @@ const Body = () => {
                 res?.info?.name?.toLowerCase().includes(searchText),
               );
 
-              setResturant(filteredRes);
-              //! Problem: once you update the resturants state variable, even after clearing the input box,
-              // you can't get the old value of all resturants - as the functional component has already being called
-              // previous value is lost now as there is no global variable concept.
+              setFilteredResturant(filteredRes);
+              //* Set the filtered resturants to display
             }}
           >
             Search
@@ -78,7 +81,7 @@ const Body = () => {
           onClick={() => {
             const updatedList = fetchTopResturants(resturants); //* sending all res data instead of a 2nd API call
 
-            //*  Re-Render the list of resturants
+            //*  Re-Render the list of resturants ( source of truth )
             setResturant(updatedList);
             console.log(`Resturant List : `, updatedList);
           }}
@@ -88,11 +91,11 @@ const Body = () => {
       </div>
 
       {
-        //* Resturant List Section
+        //* Resturant List/Card Section
       }
 
       <div className="res-card-container">
-        {resturants.map((el) => {
+        {filteredResturants.map((el) => {
           const { info: resturant } = el;
           return <ResturantCard key={resturant?.id ?? 0} data={resturant} />;
         })}
