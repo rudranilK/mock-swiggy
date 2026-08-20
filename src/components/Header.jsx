@@ -1,7 +1,10 @@
-import { LOGO_URL } from "../constants";
+import { useState } from "react";
+import { LOGO_URL, LOGIN_TEXTS } from "../constants";
 
 //* Header Component
 const Header = () => {
+  console.log("Re-render");
+
   return (
     <div className="header">
       <div className="logo-container">
@@ -18,6 +21,7 @@ const Header = () => {
           <li>About Us</li>
           <li>Contact Us</li>
           <li>Cart</li>
+          <Login />
         </ul>
       </div>
     </div>
@@ -25,3 +29,25 @@ const Header = () => {
 };
 
 export default Header;
+
+//* Making a login button to render ONLY the button
+//* If this is written inside Header, the Header component will re-render -> No need for that
+const Login = () => {
+  const [btnText, setBtnText] = useState("login");
+
+  return (
+    <button
+      className="login"
+      onClick={() => {
+        const text =
+          btnText === LOGIN_TEXTS.LOGIN
+            ? LOGIN_TEXTS.LOGOUT
+            : LOGIN_TEXTS.LOGIN;
+
+        setBtnText(text);
+      }}
+    >
+      {btnText}
+    </button>
+  );
+};

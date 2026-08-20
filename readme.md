@@ -32,3 +32,24 @@ npx parcel build src/index.html
     - function to set the set variable
     - React Fiber dicussion
     - Virtula DOM discussion
+
+## Episode 6
+
+- Mockdata structure to match API data
+- React Hook : "useEffect"
+  - The Body component rendering finishes
+  - useEffect Hook's callback function is called
+    - Calls the actual API, fetches the data
+    - Body fucntional component re-renders, with the use of arg[1] of "useState" hook
+    - Body is re-rendered with actual API data
+  - Bug Fix | ResturantCard Component not rendering
+    - patch documentation : Issue 1
+- Shimmer UI : Shimmer Functional Component
+  - Dummy UI rendering when API data is not yet with us
+  - also Known as Conditional Rendering : Render based on condition
+- LogIn Button | "useState" hook exercise
+  - Inside Header Functional Component -> Button Component
+- Search Text & Button
+  - Inside Body Functional Component -> Search text & button
+    - overwriting the original data
+    - Issue 2 in patch.md
