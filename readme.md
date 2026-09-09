@@ -70,3 +70,20 @@ npx parcel build src/index.html
 
 - `rafce` - 'React Arrow Function Component' utility by
   - extension - `ES7+ React/Redux/React-Native snippets` by `dsznajder`
+
+- `Outlet` component & Children Routes
+  - Outlet component is the placeholder.
+  - Based on what route weare in, from the children route,
+    appropiate element will be filled in place of outlet component
+
+- link the list items in `Header` component
+  - use `Link` component from react-router to move between pages
+  - using `<a href='pageLink'> </a>` reloads the whole page
+  - using `<Link to='pageLink'> </a>` only reloads the particular body component. header remains intact as is, no reload
+    - For Link component. You have to use the route name e.g. `'/'` | `'/about'` | `'/contact'` and not the file name/loc.
+
+- Routing
+  - Client Side Routing
+    - Client already has the components, when re-routed, client just loads/refreshes the differnt component
+  - Server Side Routing
+    - using anchor tag, trigger network call to fetch html page & re-render
