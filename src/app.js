@@ -5,6 +5,7 @@ import Body from "./components/Body";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
+import ResturantMenu from "./components/ResturantMenu";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
 
 //* Root Component - houses Header, Body, Footer Components
@@ -36,9 +37,14 @@ const appRouter = createBrowserRouter([
         path: "/contact",
         Component: Contact, //* another way of registering the component
       },
+      //? Dynammic Route ( :resId )
+      {
+        path: "/resturant/:resId",
+        element: <ResturantMenu />,
+      },
     ],
-    errorElement: <Error />, //* Custom Error handling components for random routes
-    //* Have to be added on the default path and not on other paths
+    errorElement: <Error />,
+    //* Custom Error handling components for random routes, Have to be added on the default path and not on other paths
   },
 ]);
 
