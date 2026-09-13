@@ -5,17 +5,31 @@ const decideMenu = (resturantId) => {
   let costForTwoMessage = "";
   let name = "";
 
-  switch (resturantId) {
+  const resId = resturantId.slice(0, 3);
+
+  switch (resId) {
     case "123":
-      cuisines = ["North indian", "kashmiri"];
-      costForTwoMessage = "₹800 for two";
-      name = "Delhi Da Dhaba";
+      cuisines = ["Italian", "Mexican"];
+      costForTwoMessage = "₹1800 for two";
+      name = "Pizza Paradise";
       break;
 
-    case "456":
+    case "234":
+      cuisines = ["American", "Fast-Food"];
+      costForTwoMessage = "₹800 for two";
+      name = "Burger Hub";
+      break;
+
+    case "345":
       cuisines = ["Bengali", "Continental"];
       costForTwoMessage = "₹1500 for two";
       name = "Khoshe kosha";
+      break;
+
+    case "456":
+      cuisines = ["Indian", "North Indian"];
+      costForTwoMessage = "₹1200 for two";
+      name = "Spice Kingdom";
       break;
   }
 
@@ -25,8 +39,9 @@ const decideMenu = (resturantId) => {
 export default decideMenu;
 
 const override = (id, name = null, cuisines = [], costForTwoMessage = null) => {
-  const data = Object.assign({}, menuItems);
+  const data = structuredClone(menuItems); //* deep copy - BUG fixed.
 
+  //* Just overriding the resturant details
   const resDetails = data?.data.cards[2].card.card.info;
 
   resDetails.id = id;
@@ -35,6 +50,8 @@ const override = (id, name = null, cuisines = [], costForTwoMessage = null) => {
   resDetails.costForTwoMessage = costForTwoMessage
     ? costForTwoMessage
     : resDetails.costForTwoMessage;
+
+  //* No override for actual menu - too much work for no reason at all
 
   return data;
 };

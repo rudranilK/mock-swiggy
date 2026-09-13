@@ -73,7 +73,7 @@ npx parcel build src/index.html
 
 - `Outlet` component & Children Routes
   - Outlet component is the placeholder.
-  - Based on what route weare in, from the children route,
+  - Based on what route we are in, from the children route,
     appropiate element will be filled in place of outlet component
 
 - link the list items in `Header` component
@@ -87,3 +87,26 @@ npx parcel build src/index.html
     - Client already has the components, when re-routed, client just loads/refreshes the differnt component
   - Server Side Routing
     - using anchor tag, trigger network call to fetch html page & re-render
+
+- Children Routes / Dynammic routes
+  - register a dynammic route e.g. `resturants/:resId` in createrBrowserRouter config
+  - This component is created under `AppLayout` component, so `Header` component is sticky for all of the components.
+  - Functional component `ResturantMenu` to handle the menu of a resturant
+  - `useParams` hook to grab the resturantId variable i.e. the dynammic route id to handle it and pass it to API / Mock data functions
+  - From the `Body` component where we return `ResturantCard` component, we return `Link` components so now the resturant cards are clickable
+  - to route them to the dynammic route `Link` now has `to={'resturants/${resturant?.id}'}` as the link.
+  - So what is happening, we are re-routing the user to hit the dynammic children route
+  - And since react-router has the `ResturantMenu` component as the handler, it is re-directed to that component now.
+  - `1 Adjustment` in `ResturantCard` component, now that we are returning a Link element e.g.
+  ```
+     return (
+            <Link to={`resturant/${resturant?.id}`} key={resturant?.id ?? 0}>
+              <ResturantCard data={resturant} />
+            </Link>
+          );
+  ```
+
+  - the `key` prop now has to be added on the `Link` component s opposed to the `ResturantCard` component that was being returned e.g.
+  ```
+     return <ResturantCard key={resturant?.id ?? 0} data={resturant} />;
+  ```
