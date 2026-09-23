@@ -65,7 +65,17 @@ npx parcel build src/index.html
 - `react-router@7` installation
   - createBrowserRouter function, RouterProvider Component for router configs
   - About, Contact, Functional components
-  - Error Component to handle any unknown routes - errorElement in default route/ AppLayout component
+  - `Error` Component to handle any unknown routes - `errorElement` parallel to default route/ AppLayout component
+
+    ```js
+    {
+        path: "/",
+        element: <AppLaylout />,
+        errorElement: <Error />,  // Custom Error handling components for random routes
+        // Have to be added on the default path and not on other paths
+    }
+    ```
+
   - `useRouterError` hook to catch all errors in routes or during rendering
 
 - `rafce` - 'React Arrow Function Component' utility by
@@ -74,7 +84,7 @@ npx parcel build src/index.html
 - `Outlet` component & Children Routes
   - Outlet component is the placeholder.
   - Based on what route we are in, from the children route,
-    appropiate element will be filled in place of outlet component
+    appropiate element will be filled in place of outlet component e.g. About, Contact, Body components
 
 - link the list items in `Header` component
   - use `Link` component from react-router to move between pages
@@ -98,15 +108,17 @@ npx parcel build src/index.html
   - So what is happening, we are re-routing the user to hit the dynammic children route
   - And since react-router has the `ResturantMenu` component as the handler, it is re-directed to that component now.
   - `1 Adjustment` in `ResturantCard` component, now that we are returning a Link element e.g.
-  ```
-     return (
-            <Link to={`resturant/${resturant?.id}`} key={resturant?.id ?? 0}>
-              <ResturantCard data={resturant} />
-            </Link>
-          );
+
+  ```jsx
+  return (
+    <Link to={`resturant/${resturant?.id}`} key={resturant?.id ?? 0}>
+      <ResturantCard data={resturant} />
+    </Link>
+  );
   ```
 
-  - the `key` prop now has to be added on the `Link` component s opposed to the `ResturantCard` component that was being returned e.g.
-  ```
-     return <ResturantCard key={resturant?.id ?? 0} data={resturant} />;
+  - the `key` prop now has to be added on the `Link` component as opposed to the `ResturantCard` component that was being returned e.g.
+
+  ```jsx
+  return <ResturantCard key={resturant?.id ?? 0} data={resturant} />;
   ```
