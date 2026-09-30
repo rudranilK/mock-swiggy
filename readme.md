@@ -122,3 +122,63 @@ npx parcel build src/index.html
   ```jsx
   return <ResturantCard key={resturant?.id ?? 0} data={resturant} />;
   ```
+
+## Episode 8
+
+- Class Based Component
+  - `UserClassComponent` example
+
+  - class `UserClassComponent` extends `React.Component {}`
+  - `constructor(props)`
+    - props are passed into the constructor
+    - where as functional components take the props as parameters
+  - `super()` call have to be 1st inside constructor
+    - to call the constructor of `React.Component`
+
+  - `this.state` = { count: 0, user: {}}
+    - state variables go inside `this.state`
+
+  - `this.setState({})`
+    - function to update the state variables.
+    - pass the state variables inside the object
+
+  - `render()`
+    - method is called to render/return the jsx/html that is rendered by React
+
+  - `componentDidMount()`
+    - is called when componet is fully mounted
+    - only called on the initial mount
+    - make your API calls inside this
+
+  - async `componentDidMount()`
+    - await the API calls inside this.
+    - useEffect does not allow an async callback
+
+  - `componentDidUpdate()`
+    - is called after render(), everytime the component is re-rendered
+
+  - `componentWillUnmount()`
+    - is called when page is redirected & component is switched
+    - Do your cleanups e.g. clearInterval, cleartimeout here
+    - otherwise it could cause performance issues
+
+  - React component lifecycle
+    - render-phase
+    - commit-phase
+    - diagram in notes
+
+  - Order in which class based component methods are called
+    - constructor
+    - render
+    - componentDidMount
+    - render ( If re-rendered due to api call )
+    - componentDidUpdate
+    - componentWillUnmount ( when component is unmounted )
+
+  - Functional Component
+    - `useEffect` returns a callback function that is called when component is unmounted
+    - similar to componentWillUnmount
+    - this is why useEffect doesnt accept an async callback as
+      - this changes the callBack function's signature to `: Promise<Function | undefined>`
+      - from `: Function | undefined`
+    - similarly, do your cleanups in this returned callback function of useEffect()
