@@ -100,3 +100,10 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+/* To have the res-card components displayed side by side */
+.menu-item {
+  display: flex;
+  flex-wrap: wrap; /* This property allows the card to take their mentioned dimentions like width * height and then 
+  have them displayed in flex, otherwise all card just display in 1 Row, crammed up */
+}

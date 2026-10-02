@@ -1,4 +1,4 @@
-import DB from "../constants/mockData";
+import getMenu from "../constants/menu";
 
 export const fetchAllResturants = async () => {
   try {
@@ -55,3 +55,39 @@ export const fetchAllResturants = async () => {
 export const fetchTopResturants = (resturants) => {
   return resturants.filter((res) => (Number(res.info.avgRating) || 0) >= 4.5);
 };
+
+export const fetchResturantMenu = async (resturantId) => {
+  //! TODO: Getting CORS from swiggy API
+  //   const res = await fetch(
+  //* Query strings are hard-coded here - Picked from swiggy live website
+  //* ResturantId has to be passed in Query Params
+  //     "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.97530&lng=77.59100&restaurantId=502957&catalog_qa=undefined&submitAction=ENTER",
+  //     {
+  //       method: "GET",
+  //     },
+  //   );
+
+  //   if (!res.ok) {
+  //     throw new Error(`HTTP error! Status: ${res.status}`);
+  //   }
+
+  //   const { data } = await res.json();
+  const { data } = await resturantMenu(resturantId);
+
+  const menuObj = data?.cards[
+    data?.cards?.length - 1
+  ]?.groupedCard?.cardGroupMap?.["REGULAR"]?.cards.find((el) =>
+    el?.card?.card?.["@type"]?.toLowerCase().includes("itemcategory"),
+  );
+
+  const menuItems = menuObj?.card?.card?.itemCards;
+
+  return {
+    resturantDetails: data?.cards[2]?.card?.card?.info || {},
+    menuItems,
+  };
+};
+
+async function resturantMenu(resturantId) {
+  return new Promise((resolve, reject) => resolve(getMenu(resturantId)));
+}

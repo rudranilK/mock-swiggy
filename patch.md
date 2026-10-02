@@ -97,3 +97,57 @@ Filter from allRestaurants and display filteredRestaurants.
 - Have the ListOfresturants as the source of truth
 - When displaying the resturant cards, display from filteredResturants
 - Initial value is added after api call ( both variables )
+
+## Issue 3.
+
+In `ResturantMenu` Component : ( Child routes )
+
+```
+ return (
+    <div className="menu">
+      <h1> Resturant Name </h1>
+      <h2> Menu </h2>
+      <ul>
+        {menuData.map((el) => {
+          const { id, name, price } = el;
+          return (
+            <div className="menu-item">
+              <li> {id}</li>
+              <li>{name}</li>
+              <li>INR {price}</li>
+            </div>
+          );
+        })}
+      </ul>
+    </div>
+  );
+```
+
+is returned. This fails to compile. We have seen this pattern in `Body` component.
+
+```
+  <div className="res-card-container">
+    {filteredResturants.map((el) => {
+      const { info: resturant } = el;
+      return <ResturantCard key={resturant?.id ?? 0} data={resturant} />;
+    })}
+  </div>
+```
+
+Here we are returning 1 ResturantCard component for each filteredResturant array item.
+
+- Link : https://react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key
+  Explains that this is not an issue with returning a Component. This is an issue with returning JSX in react.
+- We do not have a Functional Component, but a `ul` that returns a `div` for each item.
+- Whenever we iterate through a list, we have to explicitly add a property `key` to it
+- Reason is same, React needs to have this key to optimise its rendering
+- Official Docs mention this :
+
+  ```
+  You need to give each array item a key — a string or a number that uniquely identifies it among other items in that array:
+
+    <li key={person.id}>...</li>
+
+  Note:
+    JSX elements directly inside a map() call always need keys!
+  ```

@@ -1,8 +1,8 @@
 import ResturantCard from "./ResturantCard";
 import Shimmer from "./Shimmer";
-import DB from "../constants/mockData";
 import { fetchTopResturants, fetchAllResturants } from "../service";
 import { useState, useEffect } from "react";
+import { Link } from "react-router";
 
 //* Body Functional Component
 const Body = () => {
@@ -97,7 +97,11 @@ const Body = () => {
       <div className="res-card-container">
         {filteredResturants.map((el) => {
           const { info: resturant } = el;
-          return <ResturantCard key={resturant?.id ?? 0} data={resturant} />;
+          return (
+            <Link to={`resturant/${resturant?.id}`} key={resturant?.id ?? 0}>
+              <ResturantCard data={resturant} />
+            </Link>
+          );
         })}
       </div>
     </div>
