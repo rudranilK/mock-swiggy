@@ -1,3 +1,4 @@
+import { GITHUB_API } from "../constants";
 import getMenu from "../constants/menu";
 
 export const fetchAllResturants = async () => {
@@ -90,4 +91,27 @@ export const fetchResturantMenu = async (resturantId) => {
 
 async function resturantMenu(resturantId) {
   return new Promise((resolve, reject) => resolve(getMenu(resturantId)));
+}
+
+export async function fetchUserDetails(username) {
+  try {
+    const response = await fetch(`${GITHUB_API}/${username}`, {
+      method: "GET",
+      headers: {
+        "X-GitHub-Api-Version": "2026-03-10",
+      },
+    });
+
+    if (!response.ok) {
+      console.error(
+        `Github API call failed : Response status: ${response.status}`,
+      );
+    }
+
+    const user = await response.json();
+    return user;
+  } catch (error) {
+    console.error(error.message);
+    return {};
+  }
 }

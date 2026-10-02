@@ -10,3 +10,6 @@ export const LOGIN_TEXTS = {
 };
 
 Object.freeze(LOGIN_TEXTS);
+
+export const GITHUB_API = "https://api.github.com/users";
+export const GITHUB_URL = "https://github.com";
