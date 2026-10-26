@@ -2,21 +2,20 @@ import { useEffect, useState } from "react";
 import { fetchResturantMenu } from "../service";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router";
+import { Link } from "react-router";
+import useResturantMenu from "../utils/useResturantMenu";
+
+//* 1. Displays empty menu (Shimmer UI) when data is empty
+//* 2. calls fetchResturantMenu func to populate the state variable after 1st render
+//* 3. Displays the actual Resturant Menu document with actual API data
+
+//* 4. Step 2 is now exported to 'useResturantMenu' custom hook
 
 const ResturantMenu = () => {
-  const [resturantInfo, setResInfo] = useState(null);
-
   const { resId } = useParams();
 
-  useEffect(() => {
-    populateMenuData();
-  }, []);
-
-  //* CB for hook Callback
-  async function populateMenuData() {
-    const data = await fetchResturantMenu(resId);
-    setResInfo(data);
-  }
+  //* using our custom hook
+  const resturantInfo = useResturantMenu(resId);
 
   if (!resturantInfo) return <Shimmer />;
 

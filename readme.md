@@ -182,3 +182,10 @@ npx parcel build src/index.html
       - this changes the callBack function's signature to `: Promise<Function | undefined>`
       - from `: Function | undefined`
     - similarly, do your cleanups in this returned callback function of useEffect()
+
+## Episode 9
+
+- Custom Hooks
+  - 'useState', 'useEffect' hooks moved to custom hook 'useResturantMenu'
+  - custom hooks are reusable, think of them as click & expand
+  - the state variable isnt local to the custom hook, but it is local to the component the are used inside of e.g. ResturantMenu component

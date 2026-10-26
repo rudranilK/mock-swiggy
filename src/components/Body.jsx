@@ -5,6 +5,11 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router";
 
 //* Body Functional Component
+
+//* 1. Displays N * ResturantCard (Shimmer UI) when data is empty
+//* 2. calls fetchAllResturants function to populate the state variable after 1st render
+//* 3. Displays N * ResturantCard components with actual API data
+
 const Body = () => {
   //* STEP 1.0: register the useState hook & state variable for resturant data - csource of truth
   const [resturants, setResturant] = useState([]);
