@@ -186,6 +186,20 @@ npx parcel build src/index.html
 ## Episode 9
 
 - Custom Hooks
-  - 'useState', 'useEffect' hooks moved to custom hook 'useResturantMenu'
+  - `useState`, `useEffect` hooks moved to custom hook `useResturantMenu`
   - custom hooks are reusable, think of them as click & expand
   - the state variable isnt local to the custom hook, but it is local to the component the are used inside of e.g. ResturantMenu component
+
+- Feature : User is Online or Offline
+  - When user is offline, If he clicks on a resturant menu, the API call will fail
+  - Here, we want to show that user is offline rather than failing
+  - `useOnelineStatus` custom hook
+  - `window.addEventListner('offline', () => {})` -> To add listner when user is offline
+  - `window.addEventListner('online', () => {})` -> To add listner when user is online
+  - use a state variable to keep track of the status - So that whenever user goes offline <-> online, Our UI reflects that, as in react tracks the state varaible and updates or re-renders the UI.
+  - we add the eventListners inside `useEffect(() => {}, [])` with empty dependency, so it adds the listners only once!
+  - we can simulate offline situation in browser, when we are on home screen ( as we added this rendering on Body component only ), go to `Inspect` > `Network` > right below that, a drop down ( `No throttling` is selected ) > select `Offline`.
+  - we can also simulate network conditions with `fast 4G`, `slow 4G`, `3G` as well. ( Assumption is the browser adds delay to simulate it )
+  - This is how the `google Dyno game` is there, check the online status
+  - useful feature for chat applications as well
+  - onlineStatus field in `Header` component in the nav bar - Online Status feature
