@@ -203,3 +203,31 @@ npx parcel build src/index.html
   - This is how the `google Dyno game` is there, check the online status
   - useful feature for chat applications as well
   - onlineStatus field in `Header` component in the nav bar - Online Status feature
+- Lazy Loading | bundling
+  - When our single minified js bundle file is too big, we have to break it down for a big app ( ours is 2.5MB atm )
+  - A good rule is, bundle all components relative to a single feature & bundle that.
+  - We added a `Grocery` component to simulate a Different feature & it's components. ( `Header.jsx` & `Grcoery.jsx` )
+  - `lazy` function exported from react, that takes a CB. accepts an import.
+
+  ```js
+  //* Lazy Loading for chunking
+  const Grocery = lazy(() => import("./components/Grocery"));
+  ```
+
+  - The object returned by `lazy` is wrapped with `Suspense` component with a `fallback` added ( `app.js` )
+
+```js
+    {
+        path: "/grocery",
+        element: (
+          <Suspense fallback={<Shimmer />}>
+            <Grocery />
+          </Suspense>
+        ), //* Wrap with Suspense element to show the fallBack rendering while this loading is in flight
+      }
+```
+
+- So now, when we navigate to `grocery`, this component is loading at that time ( On Demand ) and also is exculded from our import during app startup.
+- a seperate `Grocery*.js` file is generated inside Dist, along with it's source map file
+- the `Suspense` component is needed as while this js loading is on flight, react has to render something ( very minute duration in ms )
+- without this `Suspense` Component, React might throw error while rendering.
