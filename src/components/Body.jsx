@@ -3,8 +3,14 @@ import Shimmer from "./Shimmer";
 import { fetchTopResturants, fetchAllResturants } from "../service";
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 //* Body Functional Component
+
+//* 1. Displays N * ResturantCard (Shimmer UI) when data is empty
+//* 2. calls fetchAllResturants function to populate the state variable after 1st render
+//* 3. Displays N * ResturantCard components with actual API data
+
 const Body = () => {
   //* STEP 1.0: register the useState hook & state variable for resturant data - csource of truth
   const [resturants, setResturant] = useState([]);
@@ -13,6 +19,9 @@ const Body = () => {
 
   //* STEP 1.2: register the useState hook & state variable for Search Filter
   const [searchText, setSearchText] = useState("");
+
+  //* STEP 1.3: Get user's online status
+  const userIsOnline = useOnlineStatus();
 
   //* Hook - runs after this 'Body' component is rendered
   useEffect(() => {
@@ -30,6 +39,11 @@ const Body = () => {
 
     //* 2. Update the filtered resturant list( Display List)
     setFilteredResturant(allRes);
+  }
+
+  //* STEP 2.0 : USER is OFFLINE - Show message
+  if (!userIsOnline) {
+    return <h3>Looks like you are offline :(</h3>;
   }
 
   //* STEP 2 : Render Shimmer UI when no data

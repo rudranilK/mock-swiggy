@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -7,6 +7,11 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import ResturantMenu from "./components/ResturantMenu";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
+import Shimmer from "./components/Shimmer";
+// import Grocery from "./components/Grocery";
+
+//* Lazy Loading for chunking
+const Grocery = lazy(() => import("./components/Grocery"));
 
 //* Root Component - houses Header, Body, Footer Components
 const AppLaylout = () => {
@@ -41,6 +46,14 @@ const appRouter = createBrowserRouter([
       {
         path: "/resturant/:resId",
         element: <ResturantMenu />,
+      },
+      {
+        path: "/grocery",
+        element: (
+          <Suspense fallback={<Shimmer />}>
+            <Grocery />
+          </Suspense>
+        ), //* Wrap with Suspense element to show the fallBack rendering while this loading is in flight
       },
     ],
     errorElement: <Error />,
